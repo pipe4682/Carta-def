@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Para Camila ❤️</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#fff5f7;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    text-align:center;
+}
+
+.container{
+    width:90%;
+    max-width:700px;
+    padding:20px;
+}
+
+h1{
+    color:#ff4f81;
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:18px;
+    background:#ff4f81;
+    color:white;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+input{
+    padding:10px;
+    font-size:18px;
+    border-radius:10px;
+    border:1px solid #ccc;
+}
+
+#mensajes{
+    font-size:24px;
+    line-height:1.8;
+    white-space:pre-line;
+}
+
+#foto{
+    display:none;
+    margin-top:20px;
+    max-width:350px;
+    width:90%;
+    border-radius:20px;
+    box-shadow:0 0 15px rgba(0,0,0,0.2);
+
+    opacity:0;
+    transition:opacity 2s ease;
+}
+
+.oculto{
+    display:none;
+}
+
+#final{
+    margin-top:30px;
+    color:#ff4f81;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="inicio">
+        <h1>💌 Para Camila</h1>
+        <button onclick="abrirCarta()">Abrir carta ❤️</button>
+    </div>
+
+    <div id="nombreDiv" class="oculto">
+        <h2>Amorcito, escribe tu nombre:</h2>
+
+        <input type="text" id="nombre">
+
+        <br><br>
+
+        <button onclick="iniciar()">Continuar ❤️</button>
+    </div>
+
+    <div id="carta" class="oculto">
+
+        <div id="mensajes"></div>
+
+        <img id="foto" src="Hurones.jpeg" alt="Hurones">
+
+        <h2 id="final" class="oculto">
+            Te amo ❤️
+            <br><br>
+            Gracias por llegar a mi vida.
+        </h2>
+
+    </div>
+
+</div>
+
+<audio id="musica" loop>
+    <source src="RunningUpThatHill.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+function abrirCarta(){
+
+    const musica = document.getElementById("musica");
+
+    musica.volume = 0.35;
+    musica.play();
+
+    document.getElementById("inicio").classList.add("oculto");
+    document.getElementById("nombreDiv").classList.remove("oculto");
+}
+
+async function iniciar(){
+
+    const nombre =
+    document.getElementById("nombre").value || "Camila";
+
+    document.getElementById("nombreDiv").classList.add("oculto");
+    document.getElementById("carta").classList.remove("oculto");
+
+    const mensajes = [
+
+        `Hola ${nombre}`,
+
+        "Vidita",
+
+        "Quería hacer bien el detalle",
+
+        "Y que lo puedas ver cuando quieras",
+
+        "jajaja",
+
+        "Amor",
+
+        "Todo este tiempo para mí ha significado mucho",
+
+        "Te has convertido en alguien muy especial",
+
+        "Y la verdad, aunque el futuro me asusta",
+
+        "Sé que vamos a poder con la distancia y todo",
+
+        "Porque la forma en la que nos queremos no es una bobada",
+
+        "Eres la mujer de mi vida",
+
+        "Eres demasiado importante para mí",
+
+        "Y siempre voy a buscar la forma de que sientas que así es",
+
+        "Te adoro",
+
+        "Me quiero quedar contigo siempre"
+
+    ];
+
+    const contenedor =
+    document.getElementById("mensajes");
+
+    for(let mensaje of mensajes){
+
+        contenedor.innerHTML += mensaje + "<br><br>";
+
+        await esperar(2000);
+    }
+
+    await esperar(4000);
+
+    await escribir(
+        "Eres de lo más bonito que tengo",
+        contenedor
+    );
+
+    await esperar(2500);
+
+    contenedor.innerHTML +=
+    "<br><br>Te hice comidita jeje 🍝<br><br>";
+
+    await esperar(3000);
+
+    contenedor.innerHTML +=
+    "Casi se me olvida...<br><br>";
+
+    await esperar(2500);
+
+    const foto =
+    document.getElementById("foto");
+
+    foto.style.display = "block";
+
+    setTimeout(() => {
+        foto.style.opacity = "1";
+    }, 100);
+
+    await esperar(3000);
+
+    document.getElementById("final")
+    .classList.remove("oculto");
+}
+
+function esperar(ms){
+
+    return new Promise(resolve =>
+        setTimeout(resolve, ms));
+}
+
+async function escribir(texto, contenedor){
+
+    let linea =
+    document.createElement("div");
+
+    contenedor.appendChild(linea);
+
+    for(let letra of texto){
+
+        linea.innerHTML += letra;
+
+        await esperar(100);
+    }
+
+    contenedor.innerHTML += "<br><br>";
+}
+
+</script>
+
+</body>
+</html>
