@@ -63,7 +63,6 @@ input{
     width:90%;
     border-radius:20px;
     box-shadow:0 0 15px rgba(0,0,0,0.2);
-
     opacity:0;
     transition:opacity 2s ease;
 }
@@ -126,7 +125,10 @@ function abrirCarta(){
     const musica = document.getElementById("musica");
 
     musica.volume = 0.35;
-    musica.play();
+
+    musica.play().catch(error => {
+        console.log("No se pudo reproducir la música:", error);
+    });
 
     document.getElementById("inicio").classList.add("oculto");
     document.getElementById("nombreDiv").classList.remove("oculto");
@@ -192,11 +194,6 @@ async function iniciar(){
         "Eres de lo más bonito que tengo",
         contenedor
     );
-
-    await esperar(2500);
-
-    contenedor.innerHTML +=
-    "<br><br>Te hice comidita jeje 🍝<br><br>";
 
     await esperar(3000);
 
